@@ -1,0 +1,69 @@
+IOT Management System Unit Testing 
+
+Total Test Cases : 40
+
+Device Management (Total Test Case: 21)
+-> Add Device
+	| - WhenDeviceIsValid 	    		(Assertion -True)
+	| - WhenDeviceAlreadyExists 		(Assertion - False, It.IsAny<Device>)
+	| - WhenRequiredFieldIsMissing -4	(Assertion - False, It.IsAny<Device>)
+	| - WhenStatusIsInvalid 		(Assertion - False, It.IsAny<Device>)	
+	| - WhenRepositoryFailsToAdd		(Assertion - False)
+	| - WhenDeviceIsNull			(Assertion - False, It.IsAny<Device>)
+	| - WhenDeviceTypeIsInvalid		(Assertion - False, It.IsAny<Device>)
+
+
+-> Get Device By ID
+	| - When_Device_Exists			(Assertion - Checks Not Null and Equal)
+	| - When_Device_Does_not_Exists		(Assertion - Null)
+
+
+-> GetAllDevices
+	| - When Device Data Exists		(Assertion - Not Null,check result count and result values)
+	| - When No Device Data Exists		(Assertion - Not Null means [], Empty
+
+
+-> Update Device
+	| - WhenDeviceIsValid			(Assertion - True)
+	| - WhenDeviceDoesNotExists		(Assertion - False, It.IsAny<Device>)
+	| - WhenRepositoryFailsToUpdate		(Assertion - False)
+	| - WhenDeviceIsNull			(Assertion - False, It.IsAny<string> for getdevicebyId ,It.IsAny<Device> for updatedevice)
+
+
+-> Delete Device
+	| - WhenDeviceExists			(Assertion - True)
+	| - WhenDeviceDoesNotExists		(Assertion - False, It.IsAny<Device>)
+	| - WhenDeleteFails			(Assertion - False)
+
+
+HealthReportService (Total Test Cases: 6)
+	|
+	| - HealthStatus			(Assertion - Should Contain Healthy)
+	| - BatteryLessThan20			(Assertion - Low Battery)
+	| - TemperatureGreaterThan70		(Assertion - High Temperature)
+	| - Battery < 20 & Temperature > 70	(Assertion - Low Battery and High Temperature)
+	| - NoTelemetryAvailableforDeviceId	(Assertion - No Telemetry Available)
+	| - WhenDeviceisNotAvailable		(Assertion - [])
+
+
+Telemetry Management (Total Test Case: 12)
+-> Add Telemetry
+	| - WhenTelemetryIsValid    		(Assertion -True)
+	| - WhenTelemetryIsNull 		(Assertion - False)
+	| - WhenRequiredFieldIsMissing - 3	(Assertion - False)
+
+-> Get Latest Telemetry
+	| - When_Telemetry_Exists		(Assertion - Checks Not Null and Equal)
+	| - When_Telemetry_Does_not_Exists	(Assertion - Null)
+
+
+-> GetTelemetryByDeviceId
+	| - When DeviceId Exists		(Assertion - Equal)
+	| - When No Device TelemetryDataExists	(Assertion -[])
+	| - WhenDeviceIdIsInvalid		(Assertion - [])
+
+
+-> GetAllTelemetry
+	| - When Telemetry Data Exists		(Assertion - Not Null,check result count and result values)
+	| - When No Telemetry Data Exists	(Assertion - Not Null means [], Empty
+
